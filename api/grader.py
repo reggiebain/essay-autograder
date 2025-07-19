@@ -1,10 +1,18 @@
 # api/grader.py
 import os
 import openai
+from openai import OpenAI
 from api.models import GradingRequest, GradingResponse
+import json
 
-openai.api_key = os.getenv("OPENAI_API_KEY")
+#openai.api_key = os.getenv("OPENAI_API_KEY")
+#client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+# Load environment variable manually in case dotenv is needed
+from dotenv import load_dotenv
+load_dotenv()
 
+# Initialize OpenAI client
+client = OpenAI()
 
 def format_prompt(essay: str, rubric: dict, slo_choice: str) -> str:
     # rubric_str = "\n".join(
@@ -13,8 +21,7 @@ def format_prompt(essay: str, rubric: dict, slo_choice: str) -> str:
     # )
     return f"""
 You are an expert writing teacher. Grade the following student essay using the rubric below. For each of the four categories, assign a score from 1 to 3. Then briefly justify your score (2–3 sentences). The SLO (Student learning outcome) is {slo_choice}. Conclude with a total score out of 12 provide feedback
-in the following format: {{\"scores\": {{\"Category1\": 2, ...}}, \"feedback\": {{\"Category1\": \"...\", ...}}}}
-
+as a valid JSON object with this structure format: {{"scores": {{"Category1": 2, ...}}, "feedback": {{"Category1": "...", ...}}}}
 Scoring Guide:
 - 1 = Needs Improvement
 - 2 = Satisfactory
@@ -50,12 +57,16 @@ Essay:
 def grade_essay(request: GradingRequest) -> GradingResponse:
     prompt = format_prompt(request.essay, request.rubric, request.slo_choice)
 
-    response = openai.ChatCompletion.create(
+    response = client.chat.completions.create(
         model="gpt-4",
         messages=[{"role": "user", "content": prompt}],
         temperature=0.3,
     )
 
-    content = response.choices[0].message.content
-    parsed = eval(content)  # Consider using json.loads() with stricter formatting
+    content = response.choices[0].message.content.strip()
+    try:
+        parsed = json.loads(content)
+    except json.JSONDecodeError:
+        parsed = eval(content)  # fallback (not recommended)
+
     return GradingResponse(**parsed)
