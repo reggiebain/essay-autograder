@@ -10,6 +10,10 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      API_KEY: ${{ secrets.API_KEY }}
+      PYTHONPATH: .
 
     steps:
     - name: Checkout repo
