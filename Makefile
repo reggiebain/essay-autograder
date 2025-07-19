@@ -7,7 +7,7 @@ run:
 	uvicorn api.main:app --reload --host 0.0.0.0 --port 8000
 
 test:
-	pytest tests/
+	PYTHONPATH=. pytest tests/
 
 docker-build:
 	docker build -t essay-autograder .
