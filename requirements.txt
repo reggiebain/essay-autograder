@@ -1,0 +1,9 @@
+# requirements.txt
+fastapi
+uvicorn
+openai
+python-dotenv
+pydantic
+pytest
+black
+mypy
