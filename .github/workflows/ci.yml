@@ -14,6 +14,7 @@ jobs:
       OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       API_KEY: ${{ secrets.API_KEY }}
       PYTHONPATH: .
+      # ENABLE_LIVE_API_TESTS: true  # ← do not enable this in CI by default
 
     steps:
     - name: Checkout repo
