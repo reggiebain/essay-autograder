@@ -1,6 +1,13 @@
 # Essay Autograder
 An easy way to check your essay on a given rubric for iteratively improving your writing.
 
+## How to run
+```
+make install     # once per machine
+make run         # starts the API
+make grade       # evaluates essays
+```
+
 ## File Structure
 ```
 essay-grader-api/
@@ -19,7 +26,7 @@ essay-grader-api/
 └── README.md                 # Project overview
 ```
 
-## Sample Entry
+## Sample Rubric Entry
 ```
 {
   "essay": "The Roman Empire fell because...",

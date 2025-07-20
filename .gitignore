@@ -1,3 +1,6 @@
+# Big data sources
+essays/
+essays_copy/
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

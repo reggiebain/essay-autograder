@@ -7,3 +7,6 @@ pydantic
 pytest
 black
 mypy
+pdfplumber
+python-docx
+requests

@@ -20,3 +20,11 @@ format:
 
 type-check:
 	mypy .
+
+# Grade all essays and save to CSV
+grade:
+	python batch_grade.py
+
+# Full setup + run server + grade
+all: install run grade
+

@@ -30,9 +30,9 @@ Scoring Guide:
 Rubric Descriptions:
 
 1. **Accuracy**  
-Score of 3: The response demonstrates a deep understanding of the definition of the specific SLO (Student Learning Outcome which is analytical thinking). It includes a detailed and accurate description of how the chosen artifact reflects the student's skills in that SLO.
-Score of 2: Response mentions the SLO and connects some details of the artifact to the spirit of the SLO. Seems to have an understanding of the spirit of the SLO’s definition.
-Score of 1: Response loosely/vaguely ties SLO definition to artifact and lacks specific examples of the connection between the two. Demonstrates lack of full understanding of the meaning of the SLO.
+Score of 3: The response demonstrates a deep understanding of the definition of {slo_choice}. It includes a detailed and accurate description of how the chosen artifact reflects the student's skills in that SLO.
+Score of 2: Response mentions the  ({slo_choice}) and connects some details of the artifact to the spirit of {slo_choice}. Seems to have an understanding of the spirit of the definition of {slo_choice}.
+Score of 1: Response loosely/vaguely ties SLO definition to artifact and lacks specific examples of the connection between the two. Demonstrates lack of full understanding of the meaning of {slo_choice}.
 
 2. **Argument**  
 Score of 3: The response presents logically sequenced, well-developed ideas with smooth transitions between sections or paragraphs. It provides multiple specific examples of how the artifact connects to the SLO definition.
