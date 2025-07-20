@@ -10,3 +10,4 @@ mypy
 pdfplumber
 python-docx
 requests
+matplotlib

@@ -6,6 +6,7 @@ An easy way to check your essay on a given rubric for iteratively improving your
 make install     # once per machine
 make run         # starts the API
 make grade       # evaluates essays
+make print       # get csv of simplified grades
 ```
 
 ## File Structure
