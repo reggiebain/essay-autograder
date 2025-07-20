@@ -5,11 +5,13 @@ import pdfplumber
 import docx
 import csv
 from dotenv import load_dotenv
+import pickle
+
 load_dotenv()
 
 
 API_URL = "http://localhost:8000/grade"
-#API_KEY = os.getenv("API_KEY", "my_secret_key_123")
+API_KEY = os.getenv("API_KEY")
 
 RUBRIC = {
     "Accuracy": {"3": "Excellent (meets all criteria)", "2": "Satisfactory", "1": "Needs Improvement"},
@@ -112,33 +114,6 @@ def process_essays(base_folder="essays"):
                 })
     return results
 
-def save_results_to_csv(results, csv_file="grading_results.csv"):
-    # Extract all rubric categories from the first result
-    rubric_keys = list(json.loads(results[0]["scores"]).keys())
-
-    # Create column headers
-    fieldnames = ["student", "filename"]
-    for key in rubric_keys:
-        fieldnames.append(f"{key}_score")
-        fieldnames.append(f"{key}_feedback")
-
-    with open(csv_file, "w", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(f, fieldnames=fieldnames)
-        writer.writeheader()
-        for row in results:
-            scores = json.loads(row["scores"])
-            feedback = json.loads(row["feedback"])
-            flat_row = {
-                "student": row["student"],
-                "filename": row["filename"],
-            }
-            for key in rubric_keys:
-                flat_row[f"{key}_score"] = scores.get(key, 0)
-                flat_row[f"{key}_feedback"] = feedback.get(key, "")
-            writer.writerow(flat_row)
-
-import pickle
-
 def save_results(results, csv_file="grading_results.csv", pkl_file="grading_results.pkl"):
     if not results:
         print("No results to save.")
@@ -180,5 +155,5 @@ def save_results(results, csv_file="grading_results.csv", pkl_file="grading_resu
 
 if __name__ == "__main__":
     results = process_essays("essays")
-    save_results_to_csv(results)
+    save_results(results)
     print("Grading complete. Results saved to grading_results.csv")
