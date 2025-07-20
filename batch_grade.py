@@ -98,6 +98,7 @@ def process_essays(base_folder="essays"):
                         results.append({
                             "student": student_folder,
                             "filename": filename,
+                            "slo": SLO_CHOICE,
                             "scores": json.dumps(result["scores"]),
                             "feedback": json.dumps(result["feedback"]),
                         })
@@ -109,12 +110,13 @@ def process_essays(base_folder="essays"):
                 results.append({
                     "student": student_folder,
                     "filename": "",
+                    "slo": SLO_CHOICE,
                     "scores": json.dumps({cat: 0 for cat in CATEGORY_LABELS}),
                     "feedback": json.dumps({cat: "No submission" for cat in CATEGORY_LABELS}),
                 })
     return results
 
-def save_results(results, csv_file="grading_results.csv", pkl_file="grading_results.pkl"):
+def save_results(results, csv_file="output/grading_results.csv", pkl_file="output/grading_results.pkl"):
     if not results:
         print("No results to save.")
         return
@@ -132,7 +134,8 @@ def save_results(results, csv_file="grading_results.csv", pkl_file="grading_resu
 
         parsed_row = {
             "student": row["student"],
-            "filename": row["filename"]
+            "filename": row["filename"],
+            "slo": row['slo']
         }
         for key in scores:
             parsed_row[f"{key}_score"] = scores.get(key, 0)

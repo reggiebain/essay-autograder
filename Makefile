@@ -25,6 +25,10 @@ type-check:
 grade:
 	python batch_grade.py
 
+# format and get simplified results
+print:
+	python output/process_output.py
+	
 # Full setup + run server + grade
 all: install run grade
 
